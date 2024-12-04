@@ -1,6 +1,5 @@
 import { Form, NavLink, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-// import { AuthContext } from "../../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -8,10 +7,11 @@ import auth from "../../firebase/firebase.config";
 import { toast } from "react-hot-toast";
 import bgImage from "../../assets/bglogin.jpg";
 import Navbar from "../../components/layout/Navbar";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
     const googleProvider = new GoogleAuthProvider();
-    // const { createNewUser, setUser, updateUser } = useContext(AuthContext);
+    const { createNewUser, setUser, updateUser } = useContext(AuthContext);
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -33,19 +33,19 @@ const Register = () => {
             setError('Password must have at least 1 upper case, 1 lower case and must have 6 characters long.')
             return
         }
-        // createNewUser(email, password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         setUser(user);
-        //         updateUser({ displayName: name, photoURL: photo })
-        //             .then(() => {
-        //                 toast.success('Registration successful!');
-        //                 navigate('/')
-        //             })
-        //     })
-        //     .catch((err) => {
-        //         setError(err.message)
-        //     });
+        createNewUser(email, password)
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                updateUser({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        toast.success('Registration successful!');
+                        navigate('/')
+                    })
+            })
+            .catch((err) => {
+                setError(err.message)
+            });
     }
     const handleGoogleLogin = () => {
         signInWithPopup(auth, googleProvider)

@@ -2,20 +2,20 @@ import { GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup } from "fir
 import auth from "../../firebase/firebase.config";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
-// import { AuthContext } from "../../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import bgImage from "../../assets/bglogin.jpg";
 import Navbar from "../../components/layout/Navbar";
 
 const Login = () => {
-    // const googleProvider = new GoogleAuthProvider();
-    // const { login, setUser } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+    const { login, setUser } = useContext(AuthContext);
     const [error, setError] = useState('');
-    // const location = useLocation();
-    // const navigate = useNavigate();
-    // const emailRef = useRef();
-    // console.log(location);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const emailRef = useRef();
+    console.log(location);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -48,18 +48,18 @@ const Login = () => {
             });
     }
 
-    // const handleForgetPassword = () => {
-    //     // console.log(emailRef.current.value);
-    //     const email = emailRef.current.value;
-    //     if (!email) {
-    //         toast.success('Please insert your email address.')
-    //     } else {
-    //         sendPasswordResetEmail(auth, email)
-    //             .then(() => {
-    //                 toast.success('Password reset email sent. Please check your email address.')
-    //             })
-    //     }
-    // }
+    const handleForgetPassword = () => {
+        // console.log(emailRef.current.value);
+        const email = emailRef.current.value;
+        if (!email) {
+            toast.success('Please insert your email address.')
+        } else {
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    toast.success('Password reset email sent. Please check your email address.')
+                })
+        }
+    }
     return (
         <div>
             <Navbar></Navbar>
@@ -76,8 +76,8 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                {/* <input type="email" name="email" ref={emailRef} placeholder="email" className="input input-bordered" required /> */}
-                                <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                                <input type="email" name="email" ref={emailRef} placeholder="email" className="input input-bordered" required />
+                                {/* <input type="email" name="email" placeholder="email" className="input input-bordered" required /> */}
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -85,13 +85,13 @@ const Login = () => {
                                 </label>
                                 <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                                 <label className="label">
-                                    {/* <NavLink
+                                    <NavLink
                                         to="/forgot-password"
                                         state={{ email: emailRef.current?.value || "" }} // Pass email as state
                                         className="label-text-alt link link-hover"
                                     >
                                         Forgot password?
-                                    </NavLink> */}
+                                    </NavLink>
                                 </label>
 
 
