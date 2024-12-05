@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     
     // console.log(user);
+    // console.log(firebase.auth().currentUser.email);
     
     const createNewUser = (email, password) => {
         setLoading(true)

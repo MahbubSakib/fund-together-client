@@ -6,6 +6,9 @@ import Register from "../pages/Register/Register";
 import AddNewCampaign from "../pages/AddNewCampaign/AddNewCampaign";
 import AllCampaign from "../pages/AllCampaign/AllCampaign";
 import CampaignDetails from "../pages/CampaignDetails/CampaignDetails";
+import MyCampaign from "../pages/MyCampaign/MyCampaign";
+import { getAuth } from "firebase/auth";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -19,12 +22,20 @@ const router = createBrowserRouter([
     {
         path: "/allCampaign",
         element: <AllCampaign></AllCampaign>,
-        loader: ()=> fetch('http://localhost:5000/campaigns')
+        loader: () => fetch('http://localhost:5000/campaigns')
     },
     {
         path: "/details/:id",
         element: <CampaignDetails></CampaignDetails>,
-        loader: ()=> fetch('http://localhost:5000/campaigns')
+        loader: ({ params }) => fetch(`http://localhost:5000/details/${params.id}`)
+    },
+    {
+        path: "/myCampaigns",
+        element: (
+            <PrivateRoute>
+                <MyCampaign />
+            </PrivateRoute>
+        ),
     },
     {
         path: "/login",

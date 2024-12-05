@@ -1,8 +1,14 @@
 import Swal from "sweetalert2";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const AddNewCampaign = () => {
+    const {user} = useContext(AuthContext);
+    console.log(user?.displayName);
+    console.log(user?.photoURL);
+
     const handleAddCampaign = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -79,10 +85,10 @@ const AddNewCampaign = () => {
                                     className="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
                                 >
-                                    <option value="personal-issue">Personal Issue</option>
-                                    <option value="startup">Startup</option>
-                                    <option value="business">Business</option>
-                                    <option value="creative-ideas">Creative Ideas</option>
+                                    <option value="Personal Issue">Personal Issue</option>
+                                    <option value="Startup">Startup</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Creative Ideas">Creative Ideas</option>
                                 </select>
                             </div>
 
@@ -128,7 +134,7 @@ const AddNewCampaign = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    value="user@example.com"
+                                    value={user?.email}
                                     readOnly
                                     className="w-full p-3 border-2 border-slate-300 rounded-lg bg-gray-100 focus:outline-none"
                                     required
@@ -141,7 +147,7 @@ const AddNewCampaign = () => {
                                 <input
                                     type="text"
                                     name="name"
-                                    value="John Doe"
+                                    value={user?.displayName}
                                     readOnly
                                     className="w-full p-3 border-2 border-slate-300 rounded-lg bg-gray-100 focus:outline-none"
                                 />
