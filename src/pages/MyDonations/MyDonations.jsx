@@ -37,7 +37,7 @@ const MyDonations = () => {
                                 <span className="font-medium">Description:</span> {donation.description}
                             </p>
                             <p className="text-lg font-semibold text-green-600 mb-2">
-                                <span className="font-medium">Min Donation:</span> {donation.minDonation}
+                                <span className="font-medium">Donated:</span> ${donation.minDonation}
                             </p>
                             <p className="text-sm text-gray-500 mb-4">
                                 <span className="font-medium">Deadline:</span> {donation.deadline}

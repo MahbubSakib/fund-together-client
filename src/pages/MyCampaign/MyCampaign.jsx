@@ -58,8 +58,8 @@ const MyCampaign = () => {
     return (
         <div>
             <Navbar />
-            <div className="container mx-auto my-10">
-                <h1 className="text-2xl font-bold mb-5">My Campaigns</h1>
+            <div className="w-11/12 mx-auto my-10">
+                <h1 className="text-2xl font-bold mb-5 text-center">My Campaigns</h1>
                 {campaigns.length > 0 ? (
                     <table className="table-auto w-full border-collapse border border-gray-300">
                         <thead>

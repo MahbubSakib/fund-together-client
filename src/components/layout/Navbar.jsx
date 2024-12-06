@@ -25,11 +25,13 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-52 p-2 shadow"
+                            style={{ zIndex: 10 }}
+                        >
                             <li><NavLink to={'/'}>Home</NavLink></li>
                             <li><NavLink to={'/allCampaign'}>All Campaign</NavLink></li>
                             <li><NavLink to={'/addNewCampaign'}>Add New Campaign</NavLink></li>
-                            <li><NavLink to={'/myCampaigns'}>My Campign</NavLink></li>
+                            <li><NavLink to={'/myCampaigns'}>My Campaign</NavLink></li>
                             <li><NavLink to={'/myDonations'}>My Donations</NavLink></li>
                         </ul>
                     </div>
@@ -40,7 +42,7 @@ const Navbar = () => {
                         <li><NavLink to={'/'}>Home</NavLink></li>
                         <li><NavLink to={'/allCampaign'}>All Campaign</NavLink></li>
                         <li><NavLink to={'/addNewCampaign'}>Add New Campaign</NavLink></li>
-                        <li><NavLink to={'/myCampaigns'}>My Campign</NavLink></li>
+                        <li><NavLink to={'/myCampaigns'}>My Campaign</NavLink></li>
                         <li><NavLink to={'/myDonations'}>My Donations</NavLink></li>
                     </ul>
                 </div>
