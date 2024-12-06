@@ -27,24 +27,24 @@ const UpdateCampaign = () => {
         }));
     };
 
-    // const handleUpdateCampaign = (e) => {
-    //     e.preventDefault();
+    const handleUpdateCampaign = (e) => {
+        e.preventDefault();
 
-    //     fetch(`http://localhost:5000/myCampaigns/${campaign._id}`, {
-    //         method: "PUT", // Use PUT for updating
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(formData),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             if (data.modifiedCount > 0) {
-    //                 alert("Campaign updated successfully!");
-    //             }
-    //         })
-    //         .catch((err) => console.error("Error updating campaign:", err));
-    // };
+        fetch(`http://localhost:5000/myCampaigns/${campaign._id}`, {
+            method: "PUT", // Use PUT for updating
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.modifiedCount > 0) {
+                    alert("Campaign updated successfully!");
+                }
+            })
+            .catch((err) => console.error("Error updating campaign:", err));
+    };
     return (
         <div>
             <Navbar></Navbar>
