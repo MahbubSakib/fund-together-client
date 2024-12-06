@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -81,9 +81,9 @@ const MyCampaign = () => {
                                     <td className="border border-gray-300 px-4 py-2">${campaign.minDonation}</td>
                                     <td className="border border-gray-300 px-4 py-2">{new Date(campaign.deadline).toLocaleDateString()}</td>
                                     <td className="border border-gray-300 px-4 py-2">
-                                        <button className="mr-5">
-                                            Update
-                                        </button>
+                                        <Link to={`/myCampaign/${campaign._id}`}>
+                                            <button className="btn join-item bg-slate-500">Update</button>
+                                        </Link>
                                         <button onClick={() => handleDelete(campaign._id)} className="btn join-item bg-slate-300">
                                             Delete
                                         </button>

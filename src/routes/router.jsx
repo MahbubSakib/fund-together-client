@@ -9,6 +9,8 @@ import CampaignDetails from "../pages/CampaignDetails/CampaignDetails";
 import MyCampaign from "../pages/MyCampaign/MyCampaign";
 import { getAuth } from "firebase/auth";
 import PrivateRoute from "./PrivateRoute";
+import UpdateCampaign from "../pages/MyCampaign/UpdateCampaign";
+import MyDonations from "../pages/MyDonations/MyDonations";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +38,15 @@ const router = createBrowserRouter([
                 <MyCampaign />
             </PrivateRoute>
         ),
+    },
+    {
+        path: "/myCampaign/:id",
+        element: <UpdateCampaign></UpdateCampaign>,
+        loader: ({params}) => fetch(`http://localhost:5000/myCampaign/${params.id}`)
+    },
+    {
+        path:'/myDonations',
+        element: <MyDonations></MyDonations>
     },
     {
         path: "/login",
