@@ -6,8 +6,10 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import slider1 from "../../assets/slider 1.jpg";
 import slider2 from "../../assets/slider 2.jpg";
 import slider3 from "../../assets/slider 3.jpg";
+import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
+    const runningCampaigns = useLoaderData();
     return (
         <div>
             <Navbar />
@@ -43,7 +45,7 @@ const Home = () => {
 
             {/* running section */}
             <div>
-                
+                {runningCampaigns.length}
             </div>
             <Footer />
         </div>
