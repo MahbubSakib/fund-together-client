@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <div>
             <Navbar />
-            <div className="mt-5">
+            <div className="">
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
                     navigation
@@ -39,6 +39,11 @@ const Home = () => {
                         </div>
                     </SwiperSlide>
                 </Swiper>
+            </div>
+
+            {/* running section */}
+            <div>
+                
             </div>
             <Footer />
         </div>
