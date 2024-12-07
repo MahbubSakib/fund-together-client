@@ -1,12 +1,12 @@
-import { GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import bgImage from "../../assets/bglogin.jpg";
 import Navbar from "../../components/layout/Navbar";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const googleProvider = new GoogleAuthProvider();
@@ -15,38 +15,60 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const emailRef = useRef();
-    console.log(location);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        // console.log(emailRef.current.value);
-        setError('')
+        setError('');
+
         login(email, password)
             .then(result => {
                 const user = result.user;
                 setUser(user);
-                navigate(location?.state ? location.state : '/')
+                Swal.fire({
+                    title: 'Logged in!',
+                    text: 'Successfully logged in',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                })
+                navigate(location?.state ? location.state : '/');
             })
-            .catch((err) => {
-                // console.log(err.message);
-                setError(err.message)
+            .catch(err => {
+                setError(err.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please check your credentials',
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                })
             });
-    }
-
-
+    };
 
     const handleGoogleLogin = () => {
         signInWithPopup(auth, googleProvider)
-            .then(result =>
-                navigate(location?.state ? location.state : '/')
-            ).catch((err) => {
-                // console.log(err.message);
-                setError(err.message)
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                Swal.fire({
+                    title: 'Logged in!',
+                    text: 'Successfully logged in',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                })
+                navigate(location?.state ? location.state : '/');
+            })
+            .catch(err => {
+                setError(err.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please check your credentials',
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                })
             });
-    }
+    };
 
     return (
         <div>
@@ -65,7 +87,6 @@ const Login = () => {
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input type="email" name="email" ref={emailRef} placeholder="email" className="input input-bordered" required />
-                                {/* <input type="email" name="email" placeholder="email" className="input input-bordered" required /> */}
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -75,33 +96,26 @@ const Login = () => {
                                 <label className="label">
                                     <NavLink
                                         to="/forgot-password"
-                                        state={{ email: emailRef.current?.value || "" }} // Pass email as state
+                                        state={{ email: emailRef.current?.value || "" }}
                                         className="label-text-alt link link-hover"
                                     >
                                         Forgot password?
                                     </NavLink>
                                 </label>
-
-
-                                {
-                                    error && (
-                                        <p className="text-sm text-red-500">{error}</p>
-                                    )
-                                }
                             </div>
                             <div className="form-control mt-6">
                                 <button type="submit" className="btn bg-blue-700 text-white hover:bg-blue-500">Login</button>
                             </div>
                             <h3 className=" text-center">Or</h3>
-
                             <div className="mb-5">
-                                <button type="button" onClick={handleGoogleLogin} className="btn px-16 bg-blue-700 text-white hover:bg-blue-500"><FcGoogle className="text-lg" style={{ backgroundColor: 'white', borderRadius: '10%' }} /> Sign in with Google</button>
+                                <button type="button" onClick={handleGoogleLogin} className="btn px-16 bg-blue-700 text-white hover:bg-blue-500">
+                                    <FcGoogle className="text-lg" style={{ backgroundColor: 'white', borderRadius: '10%' }} /> Sign in with Google
+                                </button>
                             </div>
                         </form>
                         <button className="pb-3">
                             Don't have an account? <NavLink to={'/register'}><span className="text-blue-800 hover:text-red-500">Register</span></NavLink>
                         </button>
-
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ import slider1 from "../../assets/slider 1.jpg";
 import slider2 from "../../assets/slider 2.jpg";
 import slider3 from "../../assets/slider 3.jpg";
 import crowdFunding from "../../assets/crowdfunding.jpg";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import CampaignDetails from "../CampaignDetails/CampaignDetails";
 
 const Home = () => {
@@ -73,9 +73,11 @@ const Home = () => {
                                     <span className="font-semibold">Deadline:</span> {new Date(campaign.deadline).toLocaleDateString()}
                                 </p>
                                 <div className="card-actions">
-                                    <button className="btn btn-primary w-full text-white bg-blue-500 hover:bg-blue-600 rounded-md py-2 px-4">
-                                        See More
-                                    </button>
+                                    <Link to={`/details/${campaign._id}`}>
+                                        <button className="btn btn-primary w-full text-white bg-blue-500 hover:bg-blue-600 rounded-md py-2 px-4">
+                                            See More
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import bgImage from "../../assets/bglogin.jpg";
 import Navbar from "../../components/layout/Navbar";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
     const googleProvider = new GoogleAuthProvider();
@@ -39,22 +40,45 @@ const Register = () => {
                 setUser(user);
                 updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
-                        toast.success('Registration successful!');
+                        Swal.fire({
+                            title: 'Registered!',
+                            text: 'Successfully Registered',
+                            icon: 'success',
+                            confirmButtonText: 'Close'
+                        })
                         navigate('/')
                     })
             })
             .catch((err) => {
                 setError(err.message)
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'There was a problem registering your account, try again.',
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                })
             });
     }
     const handleGoogleLogin = () => {
         signInWithPopup(auth, googleProvider)
             .then(() => {
                 toast.success('Registration successful!');
+                Swal.fire({
+                    title: 'Registered!',
+                    text: 'Successfully Registered',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                })
                 navigate('/');
             })
             .catch((error) => {
                 toast.error('Error during registration: ' + error.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'There was a problem registering your account, try again.',
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                })
             });
     };
 

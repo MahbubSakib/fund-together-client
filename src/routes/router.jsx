@@ -20,7 +20,10 @@ const router = createBrowserRouter([
     },
     {
         path: "/addNewCampaign",
-        element: <AddNewCampaign></AddNewCampaign>,
+        element: 
+        <PrivateRoute>
+            <AddNewCampaign></AddNewCampaign>
+        </PrivateRoute>,
     },
     {
         path: "/allCampaign",
@@ -36,7 +39,7 @@ const router = createBrowserRouter([
         path: "/myCampaigns",
         element: (
             <PrivateRoute>
-                <MyCampaign />
+                <MyCampaign></MyCampaign>
             </PrivateRoute>
         ),
     },
@@ -47,7 +50,11 @@ const router = createBrowserRouter([
     },
     {
         path:'/myDonations',
-        element: <MyDonations></MyDonations>
+        element: 
+        <PrivateRoute>
+            <MyDonations></MyDonations>
+        </PrivateRoute>
+        
     },
     {
         path: "/login",
