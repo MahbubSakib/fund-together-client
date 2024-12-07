@@ -113,7 +113,6 @@ const AddNewCampaign = () => {
                                     placeholder="Enter minimum donation amount"
                                     className="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
-                                    min="5"
                                 />
                             </div>
 

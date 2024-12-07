@@ -9,6 +9,10 @@ import slider3 from "../../assets/slider 3.jpg";
 import crowdFunding from "../../assets/crowdfunding.jpg";
 import { Link, useLoaderData } from "react-router-dom";
 import CampaignDetails from "../CampaignDetails/CampaignDetails";
+import Lottie from "lottie-react";
+import donation from "../../Animation - donation.json";
+import creativity from "../../Animation - creativity.json";
+import support from "../../Animation - support.json";
 
 const Home = () => {
     const runningCampaigns = useLoaderData();
@@ -81,7 +85,6 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-
                     ))
                 }
             </div>
@@ -102,8 +105,8 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
+
             <div>
                 <div className="my-10 bg-gray-100 py-10">
                     <div className="container mx-auto px-6">
@@ -114,25 +117,27 @@ const Home = () => {
                                 <p className="text-gray-600">
                                     Crowdfunding provides individuals and businesses access to much-needed funds that might not be available through traditional means like bank loans.
                                 </p>
+                                <Lottie className="w-50 mx-auto" animationData={donation} loop={true} />
                             </div>
                             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
                                 <h3 className="text-xl font-semibold text-gray-700 mb-4">Community Support</h3>
                                 <p className="text-gray-600">
                                     It brings people together to support causes they care about, fostering a sense of community and collective effort.
                                 </p>
+                                <Lottie className="w-50 mx-auto" animationData={support} loop={true} />
                             </div>
                             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
                                 <h3 className="text-xl font-semibold text-gray-700 mb-4">Empowering Creativity</h3>
                                 <p className="text-gray-600">
                                     Crowdfunding empowers creators and entrepreneurs to bring their innovative ideas to life without financial constraints.
                                 </p>
+                                <Lottie className="w-50 mx-auto" animationData={creativity} loop={true} />
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <Footer />
+            <Footer></Footer>
         </div>
     );
 };

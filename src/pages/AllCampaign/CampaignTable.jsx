@@ -15,6 +15,7 @@ const CampaignTable = ({ campaigns }) => {
                             <th>Campaign Type</th>
                             <th>Donation Amount</th>
                             <th>Deadline</th>
+                            <th>Created By</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -27,9 +28,10 @@ const CampaignTable = ({ campaigns }) => {
                                 <td>{campaign.type}</td>
                                 <td>{campaign.minDonation}</td>
                                 <td>{campaign.deadline}</td>
+                                <td>{campaign.name}</td>
                                 <td>
                                     <Link to={`/details/${campaign._id}`}>
-                                        <button>See More</button>
+                                        <button className='text-blue-700 hover:text-blue-400'>See More...</button>
                                     </Link>
                                 </td>
                             </tr>
