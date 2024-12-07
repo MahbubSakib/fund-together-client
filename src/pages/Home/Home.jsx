@@ -8,7 +8,6 @@ import slider2 from "../../assets/slider 2.jpg";
 import slider3 from "../../assets/slider 3.jpg";
 import crowdFunding from "../../assets/crowdfunding.jpg";
 import { Link, useLoaderData } from "react-router-dom";
-import CampaignDetails from "../CampaignDetails/CampaignDetails";
 import Lottie from "lottie-react";
 import donation from "../../Animation - donation.json";
 import creativity from "../../Animation - creativity.json";
@@ -17,7 +16,7 @@ import support from "../../Animation - support.json";
 const Home = () => {
     const runningCampaigns = useLoaderData();
     return (
-        <div>
+        <div className="dark">
             <Navbar />
             <div className="relative">
                 <Swiper
