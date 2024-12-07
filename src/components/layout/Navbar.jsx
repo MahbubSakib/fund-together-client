@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import { Tooltip } from 'react-tooltip'
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext)
+    console.log(user);
     return (
         <div className="bg-blue-300">
             <div className="navbar w-11/12 mx-auto">
@@ -47,11 +49,41 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end space-x-2">
-                    {/* <Link to={'/login'} className="btn">Login</Link>
-                    <Link to={'/register'} className="btn">Register</Link> */}
+                    {/* <a id="clickable">◕‿‿◕</a>
+                    <Tooltip anchorSelect="#clickable" clickable>
+                        <button style={{ zIndex: 100 }} onClick={logout}>Logout</button>
+                    </Tooltip> */}
+
                     {
                         user && user?.email ?
-                            <button onClick={logout} className="btn">Logout</button>
+                            <h4 className="text-xl mr-2 md:mr-5 relative">
+                                <a id="clickable">
+                                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500 hover:shadow-lg">
+                                        <img className="w-full h-full object-cover" src={user.photoURL || "https://via.placeholder.com/150"} alt="User" />
+                                    </div>
+                                </a>
+                                <Tooltip
+                                    style={{
+                                        zIndex: 100,
+                                        padding: "0.75rem",
+                                        backgroundColor: "#ffffff",
+                                        borderRadius: "0.5rem",
+                                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                                        color: "#333",
+                                        textAlign: "center",
+                                    }}
+                                    anchorSelect="#clickable"
+                                    clickable
+                                >
+                                    <h5 className="text-lg font-semibold mb-2 text-gray-800">{user.displayName}</h5>
+                                    <button
+                                        className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-600 transition-colors"
+                                        onClick={logout}
+                                    >
+                                        Logout
+                                    </button>
+                                </Tooltip>
+                            </h4>
                             :
                             <div>
                                 <Link to={'/login'} className="btn mr-3">Login</Link>

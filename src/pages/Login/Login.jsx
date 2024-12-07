@@ -48,18 +48,6 @@ const Login = () => {
             });
     }
 
-    const handleForgetPassword = () => {
-        // console.log(emailRef.current.value);
-        const email = emailRef.current.value;
-        if (!email) {
-            toast.success('Please insert your email address.')
-        } else {
-            sendPasswordResetEmail(auth, email)
-                .then(() => {
-                    toast.success('Password reset email sent. Please check your email address.')
-                })
-        }
-    }
     return (
         <div>
             <Navbar></Navbar>
