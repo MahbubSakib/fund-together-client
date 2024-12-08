@@ -93,15 +93,7 @@ const Login = () => {
                                     <span className="label-text">Password</span>
                                 </label>
                                 <input type="password" name="password" placeholder="password" className="input input-bordered" required />
-                                <label className="label">
-                                    <NavLink
-                                        to="/forgot-password"
-                                        state={{ email: emailRef.current?.value || "" }}
-                                        className="label-text-alt link link-hover"
-                                    >
-                                        Forgot password?
-                                    </NavLink>
-                                </label>
+                               
                             </div>
                             <div className="form-control mt-6">
                                 <button type="submit" className="btn bg-blue-700 text-white hover:bg-blue-500">Login</button>

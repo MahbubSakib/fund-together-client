@@ -6,8 +6,8 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const AddNewCampaign = () => {
     const {user} = useContext(AuthContext);
-    console.log(user?.displayName);
-    console.log(user?.photoURL);
+    // console.log(user?.displayName);
+    // console.log(user?.photoURL);
 
     const handleAddCampaign = (e) => {
         e.preventDefault();
@@ -22,9 +22,9 @@ const AddNewCampaign = () => {
         const name = form.name.value;
 
         const newCampaign = { image, title, type, description, minDonation, deadline, email, name };
-        console.log(newCampaign);
-
-        fetch('http://localhost:5000/campaigns', {
+        // console.log(newCampaign);
+        
+        fetch('https://fund-together-server.vercel.app/campaigns', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -33,14 +33,15 @@ const AddNewCampaign = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.insertedId) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'New book added successfully.',
+                        text: 'New campaign added successfully.',
                         icon: 'success',
                         confirmButtonText: 'Close'
-                    })
+                    });
+                    form.reset();
                 }
             })
     }

@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/runningCampaigns')
+        loader: () => fetch('https://fund-together-server.vercel.app/runningCampaigns')
     },
     {
         path: "/addNewCampaign",
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     {
         path: "/allCampaign",
         element: <AllCampaign></AllCampaign>,
-        loader: () => fetch('http://localhost:5000/campaigns')
+        loader: () => fetch('https://fund-together-server.vercel.app/campaigns')
     },
     {
         path: "/details/:id",
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         <PrivateRoute>
             <CampaignDetails></CampaignDetails>
         </PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/details/${params.id}`)
+        loader: ({ params }) => fetch(`https://fund-together-server.vercel.app/details/${params.id}`)
     },
     {
         path: "/myCampaigns",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         <PrivateRoute>
             <UpdateCampaign></UpdateCampaign>
         </PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/myCampaign/${params.id}`)
+        loader: ({params}) => fetch(`https://fund-together-server.vercel.app/myCampaign/${params.id}`)
     },
     {
         path:'/myDonations',

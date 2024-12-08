@@ -8,10 +8,24 @@ import Swal from 'sweetalert2';
 const CampaignDetails = () => {
     const campaign = useLoaderData();
     const { _id, image, title, type, name, description, minDonation, email, deadline } = campaign;
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+
+    // Check if the deadline is over
+    const isDeadlineOver = new Date(deadline) < new Date();
 
     const handleDonate = (e) => {
         e.preventDefault();
+
+        if(isDeadlineOver){
+            Swal.fire({
+                title: 'Error!',
+                text: 'Deadline already passed.',
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
+            return;
+        }
+
         const form = e.target;
         const title = form.title.value;
         const type = form.type.value;
@@ -24,11 +38,9 @@ const CampaignDetails = () => {
         const loggedUsername = form.loggedUsername.value;
 
         const newDonation = { title, type, description, minDonation, deadline, email, name, loggedEmail, loggedUsername };
-        console.log(newDonation);
-        // Handle form submission logic, e.g., sending data to the database
+        // console.log(newDonation);
 
-
-        fetch('http://localhost:5000/donations', {
+        fetch('https://fund-together-server.vercel.app/donations', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -37,16 +49,15 @@ const CampaignDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.insertedId) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'New book added successfully.',
+                        text: 'Thank you for your donation.',
                         icon: 'success',
                         confirmButtonText: 'Close'
-                    })
+                    });
                 }
-            })
+            });
     };
 
     return (
@@ -168,10 +179,7 @@ const CampaignDetails = () => {
                             />
                         </div>
 
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-                        >
+                        <button className='btn bg-blue-400 block w-full'>
                             Donate
                         </button>
                     </form>

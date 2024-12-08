@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const CampaignTable = ({ campaigns }) => {
-    // const { _id, image, title, type, name, description, minDonation, email, deadline } = campaign
+    const [sortedCampaigns, setSortedCampaigns] = useState(campaigns);
+    const [sortOrder, setSortOrder] = useState("asc"); // Initial sort order
+
+    const handleSort = () => {
+        const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
+
+        // Sort campaigns based on donation amount
+        const sorted = [...sortedCampaigns].sort((a, b) => {
+            return newSortOrder === "asc"
+                ? a.minDonation - b.minDonation
+                : b.minDonation - a.minDonation;
+        });
+
+        setSortedCampaigns(sorted);
+        setSortOrder(newSortOrder);
+    };
+
     return (
-        <div className='w-11/12 mx-auto my-5'>
-            <div className="overflow-x-auto">
+        <div className="w-11/12 mx-auto my-5">
+            <button className="btn" onClick={handleSort}>
+                Sort by {sortOrder === "asc" ? "Descending" : "Ascending"} Order
+            </button>
+            <div className="overflow-x-auto mt-4">
                 <table className="table table-zebra">
-                    {/* head */}
+                    {/* Table Header */}
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>No.</th>
                             <th>Title</th>
                             <th>Campaign Type</th>
                             <th>Donation Amount</th>
@@ -20,18 +39,19 @@ const CampaignTable = ({ campaigns }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        {campaigns.map((campaign, index) => (
+                        {sortedCampaigns.map((campaign, index) => (
                             <tr key={campaign._id}>
                                 <th>{index + 1}</th>
                                 <td>{campaign.title}</td>
                                 <td>{campaign.type}</td>
-                                <td>{campaign.minDonation}</td>
-                                <td>{campaign.deadline}</td>
+                                <td>${campaign.minDonation}</td>
+                                <td>{new Date(campaign.deadline).toLocaleDateString()}</td>
                                 <td>{campaign.name}</td>
                                 <td>
                                     <Link to={`/details/${campaign._id}`}>
-                                        <button className='text-blue-700 hover:text-blue-400'>See More...</button>
+                                        <button className="text-blue-700 hover:text-blue-400">
+                                            See More...
+                                        </button>
                                     </Link>
                                 </td>
                             </tr>

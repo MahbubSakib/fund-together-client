@@ -9,7 +9,7 @@ const UpdateCampaign = () => {
     const { user } = useContext(AuthContext);
     const campaign = useLoaderData();
     // const { image, title, type, description, minDonation, deadline } = campaign;
-    console.log(campaign);
+    // console.log(campaign);
     const [formData, setFormData] = useState({
         image: campaign.image || "",
         title: campaign.title || "",
@@ -30,7 +30,7 @@ const UpdateCampaign = () => {
     const handleUpdateCampaign = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:5000/myCampaigns/${campaign._id}`, {
+        fetch(`https://fund-together-server.vercel.app/myCampaigns/${campaign._id}`, {
             method: "PUT", // Use PUT for updating
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +40,11 @@ const UpdateCampaign = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data.modifiedCount > 0) {
-                    alert("Campaign updated successfully!");
+                    Swal.fire({
+                        title: "Updated!",
+                        text: "Your campaign has been updated successfully.",
+                        icon: "success",
+                    });
                 }
             })
             .catch((err) => console.error("Error updating campaign:", err));

@@ -53,7 +53,8 @@ const Home = () => {
                 <h2>Running Campaigns</h2>
             </div>
             <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
-                {
+            {runningCampaigns.length > 0 ? (
+                
                     runningCampaigns.map(campaign => (
                         <div key={campaign._id} className="card bg-gray-100 shadow-lg rounded-lg overflow-hidden">
                             <img
@@ -84,8 +85,12 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                    ))
-                }
+                    ))) : (
+                    <div className="text-xl font-semibold text-red-400">
+                        <p>No running campaigns found.</p>
+                    </div>
+                )}
+                
             </div>
 
             <div>
